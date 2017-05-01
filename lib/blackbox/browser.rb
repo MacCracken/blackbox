@@ -4,7 +4,7 @@ module Blackbox
     # Intializes Browser Class
     # Extends Watir::Browser
     ## Documentation
-    ## http://www.rubydoc.info/gems/watir-webdriver
+    ## http://www.rubydoc.info/gems/watir
     class Browser < Watir::Browser 
         # Extensions
     end # Browser

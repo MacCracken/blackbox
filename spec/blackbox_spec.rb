@@ -7,27 +7,20 @@ RSpec.describe Blackbox do
 end
 
 RSpec.describe Blackbox::Browser do
-  it "Firefox" do
-    browser = Blackbox::Browser.new :firefox
-    browser.goto 'https://www.google.com'
-    expect(browser.url).to eq 'https://www.google.com/'
-    browser.quit
-  end
+  testBrowsers = [:firefox, :chrome, :safari]
+  testBrowsers.each do |example|
+      let(:browser) { Blackbox::Browser.new example }
+      before { browser.goto 'http://google.com' } 
+      after { browser.close }
 
-  it "Chrome" do
-    browser = Blackbox::Browser.new :chrome
-    browser.goto 'https://www.google.com'
-    expect(browser.url).to eq 'https://www.google.com/'
-    browser.quit
-  end
+      it "#{example.upcase}" do 
+          expect(browser.url).to eq 'https://www.google.com/'
+          expect(browser.ready_state).to eq('complete').or eq('interactive') 
+      end
+  end # testBrowsers
+end # Blackbox::Browser
 
-  it "Safari" do
-    browser = Blackbox::Browser.new :safari
-    browser.goto 'https://www.google.com'
-    expect(browser.url).to eq 'https://www.google.com/'
-    browser.quit
-  end
-
+RSpec.describe Blackbox::Capabilities do
   it "Capabilities" do
     caps = Blackbox::Capabilities.new
     caps[:takes_screenshot] = 'true'               # Allow Screenshots
