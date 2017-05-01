@@ -1,4 +1,3 @@
 source 'https://rubygems.org'
-
-# Specify your gem's dependencies in blackbox.gemspec
+# Specified gem dependencies located in blackbox.gemspec
 gemspec
