@@ -12,7 +12,7 @@ RSpec.describe Blackbox::Browser do
       let(:browser) { Blackbox::Browser.new example }
       before { browser.goto 'http://google.com' } 
       after { browser.close }
-      it "##{example.upcase}" do
+      it "##{example.upcase}" do 
           expect(browser.url).to eq 'https://www.google.com/'
           expect(browser.ready_state).to eq('complete').or eq('interactive') 
       end
@@ -20,14 +20,19 @@ RSpec.describe Blackbox::Browser do
 end # Blackbox::Browser
 
 RSpec.describe Blackbox::Capabilities do
-  it "Capabilities" do
-    caps = Blackbox::Capabilities.new
+  caps = Blackbox::Capabilities.new 
+
+  it "#Set" do
     caps[:takes_screenshot] = 'true'               # Allow Screenshots
     caps[:javascript_enabled] = 'true'             # Allow Javascript
     caps[:native_events] = 'true'                  # Allow NativeEvents
     caps[:css_selectors_enabled] = 'true'          # Allow CSS Selector
     caps[:name] = "Watir WebDriver"
     caps['browserstack.ie.enablePopups'] = 'true'   # IE allows popups; Javascript
+    #puts caps.inspect
+  end
+
+  it "#Inspect" do
     puts caps.inspect
   end
 end
