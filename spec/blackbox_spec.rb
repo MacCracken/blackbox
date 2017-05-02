@@ -1,7 +1,7 @@
 require "spec_helper"
 
 RSpec.describe Blackbox do
-  it "has a version number" do
+  it "#VERSION !NIL" do
     expect(Blackbox::VERSION).not_to be nil
   end
 end
@@ -12,8 +12,7 @@ RSpec.describe Blackbox::Browser do
       let(:browser) { Blackbox::Browser.new example }
       before { browser.goto 'http://google.com' } 
       after { browser.close }
-
-      it "#{example.upcase}" do 
+      it "##{example.upcase}" do
           expect(browser.url).to eq 'https://www.google.com/'
           expect(browser.ready_state).to eq('complete').or eq('interactive') 
       end
