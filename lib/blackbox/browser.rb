@@ -1,4 +1,5 @@
 require 'watir'
+require 'watir-performance'
 
 module Blackbox
     # Intializes Browser Class

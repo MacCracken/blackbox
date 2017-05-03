@@ -35,4 +35,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "rspec_junit_formatter", "~> 0.2"
   spec.add_development_dependency "watir", "~> 6.2"
+  spec.add_development_dependency "watir-performance", "~> 0.3.1"
+  spec.add_development_dependency "page-object", "~> 2.1"
 end
