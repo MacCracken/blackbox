@@ -37,7 +37,6 @@ RSpec.describe Blackbox::Capabilities do
     caps[:css_selectors_enabled] = 'true'          # Allow CSS Selector
     caps[:name] = "Watir WebDriver"
     caps['browserstack.ie.enablePopups'] = 'true'   # IE allows popups; Javascript
-    #puts caps.inspect
   end
 
   it "#Inspect" do
