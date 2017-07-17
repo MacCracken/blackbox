@@ -10,19 +10,22 @@ end
   RSpec.describe Blackbox::Browser do
     testBrowsers = [:firefox, :chrome, :safari]
     testBrowsers.each do |example|
-        it "##{example.upcase}" do   
-            browser = Blackbox::Browser.new example  
-            browser.goto 'https://www.google.com/'  
-            if example != :safari
-              puts "Load Time: #{browser.performance.summary[:response_time] / 1000} seconds."
-            end
-            expect(browser.url).to eq 'https://www.google.com/'
-            expect(browser.ready_state).to eq('complete').or eq('interactive') 
-            browser.quit
+      it "##{example.upcase}" do   
+        browser = Blackbox::Browser.new example
+        browser.goto 'https://www.google.com/'  
+        
+        expect(browser.url).to eq 'https://www.google.com/'
+        expect(browser.ready_state).to eq('complete').or eq('interactive') 
+
+        if example != :safari
+          puts "Load Time: #{browser.performance.summary[:response_time] / 1000} seconds."
         end
+
+        browser.quit
+      end # Browser Example
     end # testBrowsers
   end # Blackbox::Browser
-end
+end # 5xloop
 
 RSpec.describe Blackbox::Capabilities do
   caps = Blackbox::Capabilities.new 
