@@ -7,8 +7,4 @@
 /pkg/
 /spec/reports/
 /tmp/
-
-# rspec failure tracking
-.rspec_run_status
-rspec_results.xml
-rspec_results.html
+/results/

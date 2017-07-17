@@ -5,6 +5,7 @@ RSpec.describe Blackbox do
     expect(Blackbox::VERSION).not_to be nil
   end
 end
+
 5.times do
   RSpec.describe Blackbox::Browser do
     testBrowsers = [:firefox, :chrome, :safari]

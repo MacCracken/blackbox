@@ -2,4 +2,6 @@
 #--format progress
 --format documentation
 --format RspecJunitFormatter
---out rspec_results.xml
+--out results/rspec_results.xml
+--format html
+--out results/rspec_results.html
