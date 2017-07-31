@@ -6,40 +6,45 @@ RSpec.describe Blackbox do
   end
 end
 
-5.times do
-  RSpec.describe Blackbox::Browser do
-    testBrowsers = [:firefox, :chrome, :safari]
-    testBrowsers.each do |example|
-      it "##{example.upcase}" do   
-        browser = Blackbox::Browser.new example
+RSpec.describe Blackbox::Browser do
+  testBrowsers = [:firefox, :chrome, :safari]
+  testBrowsers.each do |example|
+    describe "#{example.upcase}" do
+      it "#WORKS" do   
+        browser = Blackbox::Browser.new 'firefox'
         browser.goto 'https://www.google.com/'  
-        
         expect(browser.url).to eq 'https://www.google.com/'
-        expect(browser.ready_state).to eq('complete').or eq('interactive') 
-
-        if example != :safari
-          puts "Load Time: #{browser.performance.summary[:response_time] / 1000} seconds."
-        end
-
+        expect(browser.ready_state).to eq('complete').or eq('interactive')
+        response_time(browser)
         browser.quit
       end # Browser Example
-    end # testBrowsers
-  end # Blackbox::Browser
-end # 5xloop
+    end
+  end # testBrowsers
+end # Blackbox::Browser
 
 RSpec.describe Blackbox::Capabilities do
   caps = Blackbox::Capabilities.new 
+  testBrowsers = [:firefox, :chrome, :safari]
+  testBrowsers.each do |example|
+    describe "#{example.upcase} REMOTE" do
+      it "#Set" do
+        caps[:browser_name] = example
+        caps[:takes_screenshot] = 'true'               # Allow Screenshots
+        caps[:javascript_enabled] = 'true'             # Allow Javascript
+        caps[:native_events] = 'true'                  # Allow NativeEvents
+        caps[:css_selectors_enabled] = 'true'          # Allow CSS Selector
+        caps[:name] = "Watir WebDriver"
+        caps['browserstack.ie.enablePopups'] = 'true'   # IE allows popups; Javascript
+        expect(caps.itself).not_to eq(nil)
+      end
 
-  it "#Set" do
-    caps[:takes_screenshot] = 'true'               # Allow Screenshots
-    caps[:javascript_enabled] = 'true'             # Allow Javascript
-    caps[:native_events] = 'true'                  # Allow NativeEvents
-    caps[:css_selectors_enabled] = 'true'          # Allow CSS Selector
-    caps[:name] = "Watir WebDriver"
-    caps['browserstack.ie.enablePopups'] = 'true'   # IE allows popups; Javascript
-  end
-
-  it "#Inspect" do
-    puts caps.inspect
-  end
-end
+      it "#WORKS" do
+        browser = Blackbox::Browser.new(:remote, url: 'http://localhost:4444/wd/hub/', desired_capabilities: caps)
+        browser.goto 'https://www.google.com/'  
+        expect(browser.url).to eq 'https://www.google.com/'
+        response_time(browser)
+        browser.quit
+      end
+    end
+  end # testBrowsers
+end # Capabilities
