@@ -1,5 +1,19 @@
 require "spec_helper"
 
+def response_time(browser)
+    if browser.name != :safari
+        response = browser.performance.summary[:response_time] / 1000
+        puts "Load Time: #{response} seconds."
+        return response
+    end
+end
+
+RSpec.describe UI::Interface do
+  it "#something" do
+    UI::Interface.hello
+  end
+end
+
 RSpec.describe Blackbox do
   it "#VERSION !NIL" do
     expect(Blackbox::VERSION).not_to be nil
