@@ -2,7 +2,7 @@ module UI
     module Interface
         class << self
             def hello 
-                puts 'hello'
+                return 'hello'
             end
         end
     end

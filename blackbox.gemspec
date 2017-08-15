@@ -34,8 +34,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 12.0"
   spec.add_development_dependency "rspec", "~> 3.6"
   spec.add_development_dependency "rspec_junit_formatter", "~> 0.3"
-  spec.add_development_dependency "watir", "~> 6.5"
-  spec.add_development_dependency "selenium-webdriver", "3.4.0"
+  spec.add_development_dependency "watir", "~> 6.7"
+  spec.add_development_dependency "selenium-webdriver", "~>3.5"
   spec.add_development_dependency "watir-performance", "~> 0.3.1"
   spec.add_development_dependency "page-object", "~> 2.1"
 end

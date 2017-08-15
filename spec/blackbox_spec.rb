@@ -10,7 +10,7 @@ end
 
 RSpec.describe UI::Interface do
   it "#something" do
-    UI::Interface.hello
+    expect(UI::Interface.hello).to eq('hello')
   end
 end
 
@@ -25,7 +25,7 @@ RSpec.describe Blackbox::Browser do
   testBrowsers.each do |example|
     describe "#{example.upcase}" do
       it "#WORKS" do   
-        browser = Blackbox::Browser.new 'firefox'
+        browser = Blackbox::Browser.new example
         browser.goto 'https://www.google.com/'  
         expect(browser.url).to eq 'https://www.google.com/'
         expect(browser.ready_state).to eq('complete').or eq('interactive')
@@ -53,7 +53,7 @@ RSpec.describe Blackbox::Capabilities do
       end
 
       it "#WORKS" do
-        browser = Blackbox::Browser.new(:remote, url: 'http://localhost:4444/wd/hub/', desired_capabilities: caps)
+        browser = Blackbox::Browser.new(example, url: 'http://localhost:4444/wd/hub/', opt: caps)
         browser.goto 'https://www.google.com/'  
         expect(browser.url).to eq 'https://www.google.com/'
         response_time(browser)
