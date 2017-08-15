@@ -42,7 +42,7 @@ RSpec.describe Blackbox::Capabilities do
   testBrowsers.each do |example|
     describe "#{example.upcase} REMOTE" do
       it "#Set" do
-        caps[:browser_name] = example
+        #caps[:browser_name] = example
         caps[:takes_screenshot] = 'true'               # Allow Screenshots
         caps[:javascript_enabled] = 'true'             # Allow Javascript
         caps[:native_events] = 'true'                  # Allow NativeEvents
@@ -53,7 +53,7 @@ RSpec.describe Blackbox::Capabilities do
       end
 
       it "#WORKS" do
-        browser = Blackbox::Browser.new(example, url: 'http://localhost:4444/wd/hub/', opt: caps)
+        browser = Blackbox::Browser.new example, url: 'http://localhost:4444/wd/hub/', opt: caps
         browser.goto 'https://www.google.com/'  
         expect(browser.url).to eq 'https://www.google.com/'
         response_time(browser)
